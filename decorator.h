@@ -17,6 +17,8 @@ public:
     bool deleteDecorator();
     bool updateDecorator();
     QSqlQueryModel* tableView();
+    QSqlQuery statDecorator();
+
 
 
 

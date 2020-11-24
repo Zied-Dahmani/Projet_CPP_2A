@@ -236,11 +236,31 @@ QSqlQueryModel* Decorator::tableView()
 
     QSqlQueryModel* modal2=new QSqlQueryModel();
        QSqlQuery* qry2=new QSqlQuery();
-       qry2->prepare("SELECT * FROM DECORATEUR WHERE ID = '"+ id +"' OR ID_SALLE = '"+ id +"' OR PRIX = '"+ id +"' ");
-       qry2->exec();
+
+       if(id=="")
+       {
+           qry2->prepare("SELECT * FROM DECORATEUR ");
+           qry2->exec();
+       }
+       else
+       {
+           qry2->prepare("SELECT * FROM DECORATEUR WHERE ID = '"+ id +"' OR ID_SALLE = '"+ id +"' OR PRIX = '"+ id +"' ");
+           qry2->exec();
+       }
+
+
 
        modal2->setQuery(*qry2);
 
        return  modal2;
+
+}
+
+QSqlQuery Decorator::statDecorator()
+{
+    QSqlQuery query;
+    query.prepare("select * from DECORATEUR");
+    query.exec();
+    return query;
 
 }

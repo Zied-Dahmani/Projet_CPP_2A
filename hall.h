@@ -19,6 +19,7 @@ public:
     bool deleteHall();
     bool updateHall();
     QSqlQueryModel* tableView();
+    QSqlQuery statHall();
 
     QString getId(){ return id;}
     QString getNb_reservations() { return  nb_reservations; }

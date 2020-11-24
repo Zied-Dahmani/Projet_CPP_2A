@@ -57,6 +57,10 @@ bool Hall::addHall()
                  query.bindValue(":PRIX",price);
                  query.bindValue(":NB_PLACES",nb_places);
 
+                 QMessageBox::critical(nullptr, QObject::tr("add to data base"),
+                                       QObject::tr("Hall added \n"
+                                                   "Click Cancel to try again."), QMessageBox::Cancel);
+
                  return  query.exec() ;
 
              }
@@ -172,15 +176,31 @@ bool Hall::updateHall()
 
 QSqlQueryModel* Hall::tableView()
 {
-
     QSqlQueryModel* modal=new QSqlQueryModel();
        QSqlQuery* qry=new QSqlQuery();
 
-       qry->prepare("SELECT * FROM SALLE WHERE ID='"+ id +"' OR PRIX ='"+ id +"' OR NB_PLACES='"+ id +"'");
-       qry->exec();
+    if(id=="")
+    {
+        qry->prepare("SELECT * FROM SALLE");
+        qry->exec();
+    }
+    else
+    {
+        qry->prepare("SELECT * FROM SALLE WHERE ID='"+ id +"' OR PRIX ='"+ id +"' OR NB_PLACES='"+ id +"'");
+        qry->exec();
+    }
 
-       modal->setQuery(*qry);
+
+    modal->setQuery(*qry);
 
        return  modal;
 }
 
+QSqlQuery Hall::statHall()
+{
+    QSqlQuery query;
+    query.prepare("select * from SALLE");
+    query.exec();
+    return query;
+
+}

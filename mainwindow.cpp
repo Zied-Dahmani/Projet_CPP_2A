@@ -16,6 +16,12 @@
 #include <QSqlError>
 #include <QSqlQuery>
 
+#include <QtCharts>
+#include <QtCharts/QChartView>
+#include <QtCharts/QPieSeries>
+#include <QtCharts/QPieSlice>
+#include <QtCharts/QLegend>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -210,6 +216,18 @@ void MainWindow::on_AddButton_clicked()
 
    }
 
+    if(!ui->email_line->text().contains("@")||!ui->email_line->text().contains("."))
+    {
+        ui->email_line->setStyleSheet(QString("	border: 2px solid #e30000;"
+                                                "  border-radius: 8px;"
+                                                  "padding-left: 20px;"
+                                                  "padding-right: 20px;"
+                                                  "background-color: rgb(255,255,255);"));
+        _empty=true;
+
+   }
+
+
 
     if(_empty) return ;
 
@@ -355,12 +373,15 @@ void MainWindow::on_DisplayButton_clicked()
 
         ui->tableView->setModel(H.tableView());
 
+
+
+
+
 }
 
 void MainWindow::on_AddDecButton_2_clicked()
 {
 
-    //test git
     Decorator D(ui->search_2->text(),
                 "",
                 "",
@@ -462,7 +483,16 @@ void MainWindow::on_UpdateButton_clicked()
         _empty3=true;
    }
 
+    if(!ui->email_line_2->text().contains("@")||!ui->email_line_2->text().contains("."))
+    {
+        ui->email_line->setStyleSheet(QString("	border: 2px solid #e30000;"
+                                                "  border-radius: 8px;"
+                                                  "padding-left: 20px;"
+                                                  "padding-right: 20px;"
+                                                  "background-color: rgb(255,255,255);"));
+        _empty3=true;
 
+   }
 
     if(_empty3) return ;
 
@@ -723,5 +753,63 @@ void MainWindow::on_UpdateFindButton_2_clicked()
 
 
 
+
+}
+
+void MainWindow::on_StatHallButton_clicked()
+{
+    Hall H;
+
+    QPieSeries *series = new QPieSeries();
+            QSqlQuery query;
+                    query=H.statHall();
+            while(query.next())
+            {
+                series->append(query.value(0).toString(),query.value(6).toInt());
+            }
+
+            QChart * chart=new  QChart();
+            chart->addSeries(series);
+            chart->setTitle("Halls stats");
+
+            QChartView * chartView=new QChartView(chart);
+            chartView ->setParent(ui->horizontalFrame);
+            chartView->setFixedSize(ui->horizontalFrame->size());
+            ui->stackedWidget->setCurrentIndex(6);
+
+
+}
+
+void MainWindow::on_HallStatBackButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+
+}
+
+void MainWindow::on_StatDecoratorButton_clicked()
+{
+    Decorator D;
+
+    QPieSeries *series = new QPieSeries();
+            QSqlQuery query;
+                    query=D.statDecorator();
+            while(query.next())
+            {
+                series->append(query.value(6).toString(),query.value(6).toInt());
+            }
+
+            QChart * chart=new  QChart();
+            chart->addSeries(series);
+            chart->setTitle("Decorators stats");
+
+            QChartView * chartView=new QChartView(chart);
+            chartView ->setParent(ui->horizontalFrame_2);
+            chartView->setFixedSize(ui->horizontalFrame_2->size());
+            ui->stackedWidget->setCurrentIndex(7);
+}
+
+void MainWindow::on_DecoratorStatBackButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
 
 }

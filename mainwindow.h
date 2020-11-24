@@ -64,6 +64,14 @@ private slots:
 
     void on_UpdateFindButton_2_clicked();
 
+    void on_StatHallButton_clicked();
+
+    void on_HallStatBackButton_clicked();
+
+    void on_StatDecoratorButton_clicked();
+
+    void on_DecoratorStatBackButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

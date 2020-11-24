@@ -17,8 +17,8 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>20</y>
+      <x>100</x>
+      <y>40</y>
       <width>571</width>
       <height>391</height>
      </rect>
@@ -203,6 +203,24 @@ background-repeat : none;
        </property>
        <property name="text">
         <string/>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="StatHallButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>320</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-width : 1px;
+border-style : outset;
+border-color:rgb(60,170,153);</string>
+       </property>
+       <property name="text">
+        <string>Stat</string>
        </property>
       </widget>
      </widget>
@@ -390,6 +408,24 @@ background-repeat : none;
        </property>
        <property name="text">
         <string/>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="StatDecoratorButton">
+       <property name="geometry">
+        <rect>
+         <x>470</x>
+         <y>80</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">border-width : 1px;
+border-style : outset;
+border-color:rgb(60,170,153);</string>
+       </property>
+       <property name="text">
+        <string>Stat</string>
        </property>
       </widget>
      </widget>
@@ -1672,6 +1708,72 @@ QLineEdit:focused{
       </property>
       <property name="text">
        <string>     Hall number</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="HallStat">
+     <widget class="QFrame" name="horizontalFrame">
+      <property name="geometry">
+       <rect>
+        <x>29</x>
+        <y>69</y>
+        <width>491</width>
+        <height>231</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout"/>
+     </widget>
+     <widget class="QPushButton" name="HallStatBackButton">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+border-width : 2px;
+border-style : outset;
+background-color:rgb(60,170,153);
+color : white</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="DecoratorStat">
+     <widget class="QFrame" name="horizontalFrame_2">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>60</y>
+        <width>491</width>
+        <height>231</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2"/>
+     </widget>
+     <widget class="QPushButton" name="DecoratorStatBackButton">
+      <property name="geometry">
+       <rect>
+        <x>41</x>
+        <y>11</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+border-width : 2px;
+border-style : outset;
+background-color:rgb(60,170,153);
+color : white</string>
+      </property>
+      <property name="text">
+       <string>Back</string>
       </property>
      </widget>
     </widget>
