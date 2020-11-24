@@ -360,6 +360,7 @@ void MainWindow::on_DisplayButton_clicked()
 void MainWindow::on_AddDecButton_2_clicked()
 {
 
+    //test git
     Decorator D(ui->search_2->text(),
                 "",
                 "",
