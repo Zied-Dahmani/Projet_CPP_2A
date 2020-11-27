@@ -6,10 +6,12 @@
 
 
 
+
 class Hall
 {
     //int id,nb_reservations,number,nb_places;
     QString name,address,email,id,nb_reservations,number,nb_places,price;
+
 
 public:
     Hall();

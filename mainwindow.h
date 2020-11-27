@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "smtp.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -72,7 +74,28 @@ private slots:
 
     void on_DecoratorStatBackButton_clicked();
 
+    void on_mail_send_button_clicked();
+
+    void on_MailHallButton_clicked();
+
+    void on_DecoratorStatBackButton_2_clicked();
+
+    void on_HallMailBackButton_clicked();
+
+    void on_hall_mail_send_button_clicked();
+
+    void on_MailDecoratorBackButton_clicked();
+
+    void on_MailDecoratorButton_clicked();
+
+    void on_decorator_mail_send_button_2_clicked();
+
+    void on_decorator_mail_send_button_clicked();
+
 private:
     Ui::MainWindow *ui;
+    Smtp* smtp ;
+    QString msg;
+    QString mail;
 };
 #endif // MAINWINDOW_H

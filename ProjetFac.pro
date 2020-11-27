@@ -2,6 +2,8 @@ QT       += core gui \
     quick
 QT       += sql
 QT       += core gui charts
+QT       +=  network
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,7 +29,8 @@ SOURCES += \
     deletehall.cpp \
     hall.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    smtp.cpp
 
 HEADERS += \
     connection.h \
@@ -35,7 +38,8 @@ HEADERS += \
     deletedecorator.h \
     deletehall.h \
     hall.h \
-    mainwindow.h
+    mainwindow.h \
+    smtp.h
 
 FORMS += \
     deletedecorator.ui \

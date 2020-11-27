@@ -5,7 +5,7 @@
 #include "deletedecorator.h"
 #include "hall.h"
 #include "decorator.h"
-
+#include "smtp.h"
 
 #include <QDebug>
 #include <QMessageBox>
@@ -765,7 +765,7 @@ void MainWindow::on_StatHallButton_clicked()
                     query=H.statHall();
             while(query.next())
             {
-                series->append(query.value(0).toString(),query.value(6).toInt());
+                series->append(query.value(0).toString(),query.value(1).toInt());
             }
 
             QChart * chart=new  QChart();
@@ -795,7 +795,7 @@ void MainWindow::on_StatDecoratorButton_clicked()
                     query=D.statDecorator();
             while(query.next())
             {
-                series->append(query.value(6).toString(),query.value(6).toInt());
+                series->append(query.value(5).toString(),query.value(4).toInt());
             }
 
             QChart * chart=new  QChart();
@@ -811,5 +811,103 @@ void MainWindow::on_StatDecoratorButton_clicked()
 void MainWindow::on_DecoratorStatBackButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+
+}
+
+
+
+void MainWindow::on_MailHallButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(8);
+}
+
+void MainWindow::on_hall_mail_send_button_clicked()
+{
+    if (!ui->hall_mail_to_line->text().contains("@") || !ui->hall_mail_to_line->text().contains("."))
+    {
+        QMessageBox::critical(nullptr, QObject::tr("Mail"),
+                              QObject::tr("Email  doesn't exist.\n"
+                                          "Click Cancel to try again."), QMessageBox::Cancel);
+
+        return ;
+    }
+
+    msg=ui->hall_mail_plainText->toPlainText();
+
+    if(msg.isEmpty())
+    {
+        QMessageBox::critical(nullptr, QObject::tr("Mail"),
+                              QObject::tr("Empty mail.\n"
+                                          "Click Cancel to try again."), QMessageBox::Cancel);
+
+        return ;
+
+    }
+
+    smtp = new Smtp("depot.florallo@gmail.com" , "esprit20", "smtp.gmail.com",465);
+        connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
+
+
+        smtp->sendMail("depot.florallo@gmail.com",ui->hall_mail_to_line->text(),ui->hall_mail_subject_line->text(),msg);
+
+        ui->stackedWidget->setCurrentIndex(0);
+}
+
+
+void MainWindow::on_DecoratorStatBackButton_2_clicked()
+{
+    // HallMailBackButton
+
+    ui->stackedWidget->setCurrentIndex(0);
+
+}
+
+
+void MainWindow::on_MailDecoratorBackButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+
+}
+
+void MainWindow::on_MailDecoratorButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(9);
+
+}
+
+
+
+
+void MainWindow::on_decorator_mail_send_button_clicked()
+{
+    if (!ui->decorator_mail_to_line->text().contains("@") || !ui->decorator_mail_to_line->text().contains("."))
+        {
+            QMessageBox::critical(nullptr, QObject::tr("Mail"),
+                                  QObject::tr("Email  doesn't exist.\n"
+                                              "Click Cancel to try again."), QMessageBox::Cancel);
+
+            return ;
+        }
+
+        msg=ui->decorator_mail_plainText->toPlainText();
+
+
+        if(msg.isEmpty())
+        {
+            QMessageBox::critical(nullptr, QObject::tr("Mail"),
+                                  QObject::tr("Empty mail.\n"
+                                              "Click Cancel to try again."), QMessageBox::Cancel);
+
+            return ;
+
+        }
+
+        smtp = new Smtp("depot.florallo@gmail.com" , "esprit20", "smtp.gmail.com",465);
+            connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
+
+
+            smtp->sendMail("depot.florallo@gmail.com",ui->decorator_mail_to_line->text(),ui->decorator_mail_subject_line->text(),msg);
+
+            ui->stackedWidget->setCurrentIndex(1);
 
 }
