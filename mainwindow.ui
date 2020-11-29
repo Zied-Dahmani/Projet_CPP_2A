@@ -39,7 +39,7 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QLabel" name="title">
+      <widget class="QLabel" name="HallsTitle">
        <property name="geometry">
         <rect>
          <x>210</x>
@@ -253,7 +253,7 @@ border-color:rgb(60,170,153);</string>
         <height>431</height>
        </rect>
       </property>
-      <widget class="QLabel" name="title_2">
+      <widget class="QLabel" name="DecoratorsTitle">
        <property name="geometry">
         <rect>
          <x>210</x>

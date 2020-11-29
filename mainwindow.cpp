@@ -21,6 +21,11 @@
 #include <QtCharts/QPieSeries>
 #include <QtCharts/QPieSlice>
 #include <QtCharts/QLegend>
+#include <QPropertyAnimation>
+
+
+
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -30,10 +35,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
     //ui->listWidget->addItem("salle1");
-
-
-
-
 
 
 
@@ -51,6 +52,11 @@ MainWindow::MainWindow(QWidget *parent)
 
         //ui->hall_id_line_2->setPlaceholderText("  Hall number");
 
+        animation = new QPropertyAnimation (ui->HallsTitle,"geometry");
+            animation->setDuration(10000);
+            animation->setStartValue(ui->HallsTitle->geometry());
+            animation->setEndValue(QRect(160,10,171,30));
+            animation->start();
 
 }
 
@@ -67,6 +73,12 @@ MainWindow::~MainWindow()
 void MainWindow::on_SelectHallButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
+
+    animation = new QPropertyAnimation (ui->DecoratorsTitle,"geometry");
+        animation->setDuration(10000);
+        animation->setStartValue(ui->DecoratorsTitle->geometry());
+        animation->setEndValue(QRect(160,10,171,30));
+        animation->start();
 
 }
 
@@ -242,9 +254,24 @@ void MainWindow::on_AddButton_clicked()
            );
 
     bool fn=H.addHall();
-    if(fn)   ui->stackedWidget->setCurrentIndex(0);
+    if(fn)  {
+        ui->stackedWidget->setCurrentIndex(0);
 
+        Hall H(ui->search_line->text(),
+               "",
+               "",
+               "",
+               "",
+               "",
+               "",
+               ""
+               );
 
+        ui->tableView->setModel(H.tableView());
+        ui->tableView->resizeRowsToContents();
+        ui->tableView->resizeColumnsToContents();
+
+    }
 
 
 }
@@ -344,7 +371,23 @@ void MainWindow::on_AddButton_2_clicked()
 
 
        bool fn=D.addDecorator();
-       if(fn) ui->stackedWidget->setCurrentIndex(1);
+       if(fn)
+       {
+
+           ui->stackedWidget->setCurrentIndex(1);
+           Decorator D(ui->search_2->text(),
+                       "",
+                       "",
+                       "",
+                       "",
+                       "",
+                       ""
+                       );
+
+               ui->tableView_2->setModel(D.tableView());
+               ui->tableView_2->resizeRowsToContents();
+               ui->tableView_2->resizeColumnsToContents();
+       }
 
 
 }
@@ -372,7 +415,8 @@ void MainWindow::on_DisplayButton_clicked()
                );
 
         ui->tableView->setModel(H.tableView());
-
+        ui->tableView->resizeRowsToContents();
+        ui->tableView->resizeColumnsToContents();
 
 
 
@@ -392,6 +436,8 @@ void MainWindow::on_AddDecButton_2_clicked()
                 );
 
         ui->tableView_2->setModel(D.tableView());
+        ui->tableView_2->resizeRowsToContents();
+        ui->tableView_2->resizeColumnsToContents();
 
 
 }
@@ -844,11 +890,11 @@ void MainWindow::on_hall_mail_send_button_clicked()
 
     }
 
-    smtp = new Smtp("depot.florallo@gmail.com" , "esprit20", "smtp.gmail.com",465);
+    smtp = new Smtp("smartwedding.esprit@gmail.com" , "esprit20", "smtp.gmail.com",465);
         connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
 
 
-        smtp->sendMail("depot.florallo@gmail.com",ui->hall_mail_to_line->text(),ui->hall_mail_subject_line->text(),msg);
+        smtp->sendMail("smartwedding.esprit@gmail.com",ui->hall_mail_to_line->text(),ui->hall_mail_subject_line->text(),msg);
 
         ui->stackedWidget->setCurrentIndex(0);
 }
@@ -902,11 +948,11 @@ void MainWindow::on_decorator_mail_send_button_clicked()
 
         }
 
-        smtp = new Smtp("depot.florallo@gmail.com" , "esprit20", "smtp.gmail.com",465);
+        smtp = new Smtp("smartwedding.esprit@gmail.com" , "esprit20", "smtp.gmail.com",465);
             connect(smtp, SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
 
 
-            smtp->sendMail("depot.florallo@gmail.com",ui->decorator_mail_to_line->text(),ui->decorator_mail_subject_line->text(),msg);
+            smtp->sendMail("smartwedding.esprit@gmail.com",ui->decorator_mail_to_line->text(),ui->decorator_mail_subject_line->text(),msg);
 
             ui->stackedWidget->setCurrentIndex(1);
 

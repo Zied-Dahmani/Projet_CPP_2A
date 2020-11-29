@@ -57,7 +57,7 @@ bool Hall::addHall()
                  query.bindValue(":PRIX",price);
                  query.bindValue(":NB_PLACES",nb_places);
 
-                 QMessageBox::critical(nullptr, QObject::tr("add to data base"),
+                 QMessageBox::information(nullptr, QObject::tr("add to data base"),
                                        QObject::tr("Hall added \n"
                                                    "Click Cancel to try again."), QMessageBox::Cancel);
 

@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "smtp.h"
+#include <QPropertyAnimation>
+
 
 
 QT_BEGIN_NAMESPACE
@@ -97,5 +99,10 @@ private:
     Smtp* smtp ;
     QString msg;
     QString mail;
+    QPropertyAnimation *animation;
+
+
+
+
 };
 #endif // MAINWINDOW_H
