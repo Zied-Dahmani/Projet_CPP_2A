@@ -217,7 +217,7 @@ background-repeat : none;
        <property name="styleSheet">
         <string notr="true">border-width : 1px;
 border-style : outset;
-border-color:rgb(60,170,153);</string>
+border-color:rgb(255, 0, 255);</string>
        </property>
        <property name="text">
         <string>Stat</string>
@@ -440,7 +440,7 @@ background-repeat : none;
        <property name="styleSheet">
         <string notr="true">border-width : 1px;
 border-style : outset;
-border-color:rgb(60,170,153);</string>
+border-color:rgb(255, 0, 255);</string>
        </property>
        <property name="text">
         <string>Stat</string>
